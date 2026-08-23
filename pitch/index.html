@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RevEngine AI — Razorpay Buildathon 2025</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+<style>
+  :root {
+    --violet: #7c3aed;
+    --violet-light: #a78bfa;
+    --indigo: #4f46e5;
+    --green: #22c55e;
+    --yellow: #eab308;
+    --red: #ef4444;
+    --orange: #f97316;
+    --pink: #ec4899;
+    --blue: #3b82f6;
+    --gray-900: #111827;
+    --gray-800: #1f2937;
+    --gray-700: #374151;
+    --gray-400: #9ca3af;
+    --gray-200: #e5e7eb;
+  }
+
+  .reveal { font-family: 'Inter', system-ui, sans-serif; }
+  .reveal .slides section { height: 100%; }
+
+  /* ── Common ── */
+  .slide-inner { height: 100%; display: flex; flex-direction: column; justify-content: center; padding: 0 60px; }
+  .tag { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.55em; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
+  .tag-violet { background: rgba(124,58,237,0.25); border: 1px solid rgba(124,58,237,0.5); color: #a78bfa; }
+  .tag-green  { background: rgba(34,197,94,0.2);  border: 1px solid rgba(34,197,94,0.4);  color: #86efac; }
+  .tag-blue   { background: rgba(59,130,246,0.2); border: 1px solid rgba(59,130,246,0.4); color: #93c5fd; }
+  .tag-red    { background: rgba(239,68,68,0.2);  border: 1px solid rgba(239,68,68,0.4);  color: #fca5a5; }
+
+  .grad-text { background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .grad-text-green { background: linear-gradient(135deg, #4ade80 0%, #22d3ee 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  .card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px 24px; }
+  .card-violet { background: rgba(124,58,237,0.15); border: 1px solid rgba(124,58,237,0.35); border-radius: 12px; padding: 20px 24px; }
+  .card-green  { background: rgba(34,197,94,0.1);  border: 1px solid rgba(34,197,94,0.3);  border-radius: 12px; padding: 16px 20px; }
+  .card-red    { background: rgba(239,68,68,0.1);  border: 1px solid rgba(239,68,68,0.3);  border-radius: 12px; padding: 16px 20px; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 14px; }
+
+  h1.main { font-size: 2.8em !important; font-weight: 800; line-height: 1.1; margin: 0 0 16px; }
+  h2.section { font-size: 2em !important; font-weight: 700; margin: 0 0 8px; }
+  h3.card-title { font-size: 0.75em !important; font-weight: 600; margin: 0 0 6px; color: #e5e7eb; }
+  p.sub { font-size: 0.65em; color: #9ca3af; margin: 0; line-height: 1.5; }
+  p.hero-sub { font-size: 0.72em; color: #9ca3af; margin: 0 0 32px; max-width: 640px; line-height: 1.6; }
+
+  .reveal h1, .reveal h2, .reveal h3, .reveal p { text-transform: none; }
+
+  .stat-big { font-size: 2.2em; font-weight: 800; line-height: 1; }
+  .stat-label { font-size: 0.6em; color: #9ca3af; margin-top: 4px; }
+
+  .flow-arrow { color: rgba(124,58,237,0.7); font-size: 1.2em; display: flex; align-items: center; justify-content: center; }
+
+  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 20px; font-size: 0.55em; font-weight: 600; }
+  .pill-green  { background: rgba(34,197,94,0.2);  color: #86efac; border: 1px solid rgba(34,197,94,0.4); }
+  .pill-violet { background: rgba(124,58,237,0.2); color: #c4b5fd; border: 1px solid rgba(124,58,237,0.4); }
+  .pill-yellow { background: rgba(234,179,8,0.2);  color: #fde047; border: 1px solid rgba(234,179,8,0.4); }
+  .pill-red    { background: rgba(239,68,68,0.2);  color: #fca5a5; border: 1px solid rgba(239,68,68,0.4); }
+
+  .check { color: #22c55e; margin-right: 6px; }
+  .cross { color: #ef4444; margin-right: 6px; }
+
+  .formula-box { background: rgba(124,58,237,0.15); border: 1px solid rgba(124,58,237,0.4); border-radius: 12px; padding: 20px 28px; font-family: 'Courier New', monospace; font-size: 0.72em; color: #c4b5fd; line-height: 1.8; text-align: center; }
+
+  .divider { width: 48px; height: 3px; background: linear-gradient(90deg, #7c3aed, #3b82f6); border-radius: 2px; margin: 12px 0 20px; }
+
+  .rzp-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,102,255,0.15); border: 1px solid rgba(0,102,255,0.4); border-radius: 8px; padding: 8px 16px; font-size: 0.6em; color: #93c5fd; font-weight: 600; }
+
+  .phase-row { display: flex; align-items: flex-start; gap: 16px; padding: 14px 18px; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
+  .phase-num { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, #7c3aed, #4f46e5); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.65em; flex-shrink: 0; }
+
+  /* Slide-specific bg accents */
+  .bg-hero    { background: radial-gradient(ellipse at 80% 50%, rgba(124,58,237,0.2) 0%, transparent 60%), #050810; }
+  .bg-problem { background: radial-gradient(ellipse at 20% 80%, rgba(239,68,68,0.15) 0%, transparent 60%), #050810; }
+  .bg-solution{ background: radial-gradient(ellipse at 50% 20%, rgba(124,58,237,0.18) 0%, transparent 60%), #050810; }
+  .bg-arch    { background: radial-gradient(ellipse at 80% 80%, rgba(59,130,246,0.15) 0%, transparent 60%), #050810; }
+  .bg-result  { background: radial-gradient(ellipse at 50% 50%, rgba(34,197,94,0.12) 0%, transparent 60%), #050810; }
+  .bg-team    { background: radial-gradient(ellipse at 50% 100%, rgba(124,58,237,0.25) 0%, transparent 60%), #050810; }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ══════════════════════════════════════════════════════════════
+  SLIDE 1 — TITLE
+══════════════════════════════════════════════════════════════ -->
+<section data-background-color="#050810" class="bg-hero">
+  <div class="slide-inner" style="padding: 0 80px;">
+    <div style="display:flex; flex-direction:column; gap:0;">
+      <div style="display:flex; align-items:center; gap:16px; margin-bottom:24px;">
+        <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#7c3aed,#4f46e5);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.3em;color:white;">R</div>
+        <span style="font-size:0.65em;color:#6b7280;font-weight:600;letter-spacing:0.05em;">REVENGINE AI</span>
+      </div>
+
+      <h1 class="main">
+        Autonomous AI<br/>
+        <span class="grad-text">Revenue Recovery</span><br/>
+        Engine
+      </h1>
+
+      <p class="hero-sub">
+        Closed-loop detection, diagnostic triage, and autonomous intervention<br/>for at-risk revenue — built on Razorpay.
+      </p>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <span class="pill pill-violet">📡 Real-time Webhook Ingestion</span>
+        <span class="pill pill-green">🤖 ML Retry Sequencer</span>
+        <span class="pill pill-yellow">📊 Holdout Attribution</span>
+        <span class="pill pill-violet">🛡️ Compliance Guardrails</span>
+      </div>
+
+      <div style="margin-top:36px; padding-top:24px; border-top:1px solid rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:space-between;">
+        <div>
+          <p style="font-size:0.55em; color:#6b7280; margin:0;">PRODUCT LEAD</p>
+          <p style="font-size:0.65em; color:#e5e7eb; font-weight:600; margin:4px 0 0;">Pratham Prasad</p>
+        </div>
+        <div class="rzp-badge">🔵 Razorpay Buildathon 2025</div>
+        <div style="text-align:right;">
+          <p style="font-size:0.55em; color:#6b7280; margin:0;">TARGET RECOVERY LIFT</p>
+          <p style="font-size:0.75em; color:#a78bfa; font-weight:700; margin:4px 0 0;">+28% to +45%</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+  SLIDE 2 — THE PROBLEM
+══════════════════════════════════════════════════════════════ -->
+<section data-background-color="#050810" class="bg-problem">
+  <div class="slide-inner">
+    <span class="tag tag-red">The Problem</span>
+    <h2 class="section">Revenue is <span style="color:#ef4444;">silently leaking</span><br/>out of every payment stack</h2>
+    <div class="divider"></div>
+
+    <div class="grid-3" style="margin-bottom:20px;">
+      <div class="card" style="text-align:center;">
+        <div class="stat-big" style="color:#ef4444;">$1.2T</div>
+        <div class="stat-label">in failed payments<br/>globally per year</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div class="stat-big" style="color:#eab308;">&lt;18%</div>
+        <div class="stat-label">recovery rate with<br/>traditional dunning</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div class="stat-big" style="color:#f97316;">48 days</div>
+        <div class="stat-label">average B2B DSO<br/>(Days Sales Outstanding)</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card-red">
+        <h3 class="card-title">❌ Static Dunning Rules</h3>
+        <p class="sub">Rigid 3-day retry loops fail because they ignore issuer liquidity windows, timezone, and customer payment behaviour.</p>
+      </div>
+      <div class="card-red">
+        <h3 class="card-title">❌ No Root-Cause Diagnosis</h3>
+        <p class="sub">Treating a stolen card the same as an insufficient funds failure. Same email template, same cadence, every time.</p>
+      </div>
+      <div class="card-red">
+        <h3 class="card-title">❌ Credit-Stealing Attribution</h3>
+        <p class="sub">Existing tools claim credit for organic recoveries — customers who would have paid anyway. No holdout group. No proof.</p>
+      </div>
+      <div class="card-red">
+        <h3 class="card-title">❌ Zero UPI/Mandate Intelligence</h3>
+        <p class="sub">India's ₹20L Cr/month UPI Autopay volume has no smart recovery layer. Pre-debit failures go unhandled.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+  SLIDE 3 — WHY NOW
+══════════════════════════════════════════════════════════════ -->
+<section data-background-color="#050810">
+  <div class="slide-inner">
+    <span class="tag tag-blue">Why Now</span>
+    <h2 class="section">India's payment stack is<br/><span class="grad-text">uniquely ripe</span> for AI recovery</h2>
+    <div class="divider"></div>
+
+    <div class="grid-2" style="gap:24px;">
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div class="card" style="display:flex;gap:16px;align-items:flex-start;">
+          <span style="font-size:1.4em;">📱</span>
+          <div>
+            <h3 class="card-title">UPI Autopay Explosion</h3>
+            <p class="sub">500M+ UPI users. e-Mandate volume growing 3x YoY. Mandate failure rates of 12–18% are completely unaddressed by incumbents.</p>
+          </div>
+        </div>
+        <div class="card" style="display:flex;gap:16px;align-items:flex-start;">
+          <span style="font-size:1.4em;">🔄</span>
+          <div>
+            <h3 class="card-title">Subscription Economy Scale</h3>
+            <p class="sub">SaaS, OTT, edtech, fintech — India's recurring revenue economy crossed ₹15,000 Cr/year. Involuntary churn is the #1 silent killer.</p>
+          </div>
+        </div>
+        <div class="card" style="display:flex;gap:16px;align-items:flex-start;">
+          <span style="font-size:1.4em;">🏭</span>
+          <div>
+            <h3 class="card-title">B2B Digitisation Wave</h3>
+            <p class="sub">GST e-invoicing mandates mean AR data is now structured. AI can parse payment commitments from email threads automatically.</p>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div class="card-violet" style="padding:28px;">
+          <p style="font-size:0.6em;color:#c4b5fd;font-weight:600;margin:0 0 12px;">RAZORPAY ADVANTAGE</p>
+          <p class="sub" style="line-height:1.8;">
+            ✅ Real-time webhooks for all payment events<br/>
+            ✅ Subscription + mandate APIs natively integrated<br/>
+            ✅ Payment Links API for zero-login recovery<br/>
+            ✅ UPI Autopay + NACH mandate lifecycle events<br/>
+            ✅ 10M+ merchant network = massive training signal
+          </p>
+        </div>
+        <div class="card" style="text-align:center; padding:24px;">
+          <div class="stat-big grad-text">₹840 Cr</div>
+          <div class="stat-label">estimated annual recoverable<br/>revenue for Razorpay merchants<br/>(assuming 2% GMV leakage)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+  SLIDE 4 — SOLUTION OVERVIEW
+══════════════════════════════════════════════════════════════ -->
+<section data-background-color="#050810" class="bg-solution">
+  <div class="slide-inner">
+    <span class="tag tag-violet">Solution</span>
+    <h2 class="section">Four modules. One<br/><span class="grad-text">closed-loop engine.</span></h2>
+    <div class="divider"></div>
+
+    <div class="grid-4" style="margin-top:8px;">
+      <div class="card" style="border-color:rgba(124,58,237,0.4); text-align:center; padding:22px 16px;">
+        <div style="font-size:1.8em; margin-bottom:10px;">📡</div>
+        <h3 class="card-title" style="color:#a78bfa;">Module 1</h3>
+        <p style="font-size:0.7em;font-weight:600;color:white;margin:4px 0 8px;">Telemetry Ingestion</p>
+        <p class="sub">Real-time Razorpay webhook stream. Normalises payment.failed, mandate.revoked, cart.abandoned into canonical events.</p>
+      </div>
+      <div class="card" style="border-color:rgba(59,130,246,0.4); text-align:center; padding:22px 16px;">
+        <div style="font-size:1.8em; margin-bottom:10px;">🔬</div>
+        <h3 class="card-title" style="color:#93c5fd;">Module 2</h3>
+        <p style="font-size:0.7em;font-weight:600;color:white;margin:4px 0 8px;">Diagnostic Classifier</p>
+        <p class="sub">Deterministic rule engine maps error codes → 6 categories. Hard vs soft, mandate, cart, B2B, credential expiry.</p>
+      </div>
+      <div class="card" style="border-color:rgba(234,179,8,0.4); text-align:center; padding:22px 16px;">
+        <div style="font-size:1.8em; margin-bottom:10px;">🤖</div>
+        <h3 class="card-title" style="color:#fde047;">Module 3</h3>
+        <p style="font-size:0.7em;font-weight:600;color:white;margin:4px 0 8px;">Dynamic Orchestration</p>
+        <p class="sub">ML retry sequencer, Hinglish WhatsApp nudges, magic payment links, B2B Promise-to-Pay tracker.</p>
+      </div>
+      <div class="card" style="border-color:rgba(34,197,94,0.4); text-align:center; padding:22px 16px;">
+        <div style="font-size:1.8em; margin-bottom:10px;">📊</div>
+        <h3 class="card-title" style="color:#86efac;">Module 4</h3>
+        <p style="font-size:0.7em;font-weight:600;color:white;margin:4px 0 8px;">Attribution Ledger</p>
+        <p class="sub">5% holdout group. Immutable audit trail. Net agent recovery formula. Proves lift above organic baseline.</p>
+      </div>
+    </div>
+
+    <!-- Flow diagram -->
+    <div style="margin-top:24px; display:flex; align-items:center; justify-content:center; gap:8px;">
+      <div style="background:rgba(124,58,237,0.2);border:1px solid rgba(124,58,237,0.5);border-radius:8px;padding:8px 16px;font-size:0.55em;color:#c4b5fd;font-weight:600;">Razorpay Webhook</div>
+      <div style="color:#6b7280;font-size:1em;">→</div>
+      <div style="background:rgba(59,130,246,0.2);border:1px solid rgba(59,130,246,0.5);border-radius:8px;padding:8px 16px;font-size:0.55em;color:#93c5fd;font-weight:600;">Classify</div>
+      <div style="color:#6b7280;">→</div>
+      <div style="background:rgba(34,197,94,0.2);border:1px solid rgba(34,197,94,0.5);border-radius:8px;padding:8px 16px;font-size:0.55em;color:#86efac;font-weight:600;">Enrich</div>
+      <div style="color:#6b7280;">→</div>
+      <div style="background:rgba(234,179,8,0.2);border:1px solid rgba(234,179,8,0.5);border-radius:8px;padding:8px 16px;font-size:0.55em;color:#fde047;font-weight:600;">ML Retry / Nudge</div>
+      <div style="color:#6b7280;">→</div>
+      <div style="background:rgba(236,72,153,0.2);border:1px solid rgba(236,72,153,0.5);border-radius:8px;padding:8px 16px;font-size:0.55em;color:#f9a8d4;font-weight:600;">Attribute</div>
+      <div style="color:#6b7280;">→</div>
+      <div style="background:rgba(34,197,94,0.3);border:1px solid rgba(34,197,94,0.6);border-radius:8px;padding:8px 16px;font-size:0.55em;color:#4ade80;font-weight:700;">💰 Recovered</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+  SLIDE 5 — DIAGNOSTIC CLASSIFIER
+══════════════════════════════════════════════════════════════ -->
+<section data-background-color="#050810">
+  <div class="slide-inner">
+    <span class="tag tag-blue">Module 2 Deep Dive</span>
+    <h2 class="section">Every failure gets a<br/><span class="grad-text">precise diagnosis</span></h2>
+    <div class="divider"></div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="display:grid;grid-template-columns:180px 1fr 1fr;gap:12px;align-items:center;padding:10px 16px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:10px;">
+        <span class="pill pill-red" style="width:fit-content;">🚫 Hard Decline</span>
+        <p class="sub"><code style="color:#fca5a5;">DO_NOT_HONOR · STOLEN_CARD · PICKUP_CARD</code></p>
+        <p class="sub">⚡ Zero retries. Dispatch secure 1-click card swap link immediately.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:180px 1fr 1fr;gap:12px;align-items:center;padding:10px 16px;background:rgba(234,179,8,0.1);border:1px solid rgba(234,179,8,0.3);border-radius:10px;">
+        <span class="pill pill-yellow" style="width:fit-content;">💳 Soft Decline</span>
+        <p class="sub"><code style="color:#fde047;">INSUFFICIENT_FUNDS · TRY_AGAIN_LATER · GATEWAY_ERROR</code></p>
+        <p class="sub">🤖 ML retry sequencer → salary-day peak windows.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:180px 1fr 1fr;gap:12px;align-items:center;padding:10px 16px;background:rgba(249,115,22,0.1);border:1px solid rgba(249,115,22,0.3);border-radius:10px;">
+        <span class="pill" style="background:rgba(249,115,22,0.2);color:#fdba74;border:1px solid rgba(249,115,22,0.4);width:fit-content;">⏰ Credential Expiry</span>
+        <p class="sub"><code style="color:#fdba74;">EXPIRED_CARD · INVALID_CVV · CARD_VELOCITY_EXCEEDED</code></p>
+        <p class="sub">🔄 Network Token fetch → zero-login card update link.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:180px 1fr 1fr;gap:12px;align-items:center;padding:10px 16px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:10px;">
+        <span class="pill pill-violet" style="width:fit-content;">📱 Mandate Failure</span>
+        <p class="sub"><code style="color:#c4b5fd;">MANDATE_REVOKED · UPI_PIN_FAILURE · PRE_DEBIT_FAILED</code></p>
+        <p class="sub">🗣️ Hinglish WhatsApp nudge + UPI payment link fallback.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:180px 1fr 1fr;gap:12px;align-items:center;padding:10px 16px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);border-radius:10px;">
+        <span class="pill pill-violet" style="background:rgba(59,130,246,0.2);color:#93c5fd;border-color:rgba(59,130,246,0.4);width:fit-content;">🛒 Cart Abandoned</span>
+        <p class="sub"><code style="color:#93c5fd;">CART_ABANDONED · SESSION_EXPIRED</code></p>
+        <p class="sub">⚡ Sub-10-min WhatsApp nudge with pre-filled payment link.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:180px 1fr 1fr;gap:12px;align-items:center;padding:10px 16px;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.3);border-radius:10px;">
+        <span class="pill" style="background:rgba(236,72,153,0.2);color:#f9a8d4;border:1px solid rgba(236,72,153,0.4);width:fit-content;">📄 B2B Overdue</span>
+        <p class="sub"><code style="color:#f9a8d4;">INVOICE_OVERDUE · NET30_BREACHED · NET60_BREACHED</code></p>
+        <p class="sub">🤝 Autonomous AR chaser → Promise-to-Pay commitment capture.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+  SLIDE 6 — ML RETRY SEQUENCER
+══════════════════════════════════════════════════════════════ -->
+<section data-background-color="#050810" class="bg-arch">
+  <div class="slide-inner">
+    <span class="tag tag-violet">Module 3 — ML Retry Sequencer</span>
+    <h2 class="section">Retry at <span class="grad-text">exactly the right moment</span></h2>
+    <div class="divider"></div>
+
+    <div class="grid-2" style="gap:28px; align-items:start;">
+      <div>
+        <div class="card-violet" style="margin-bottom:16px;">
+          <h3 class="card-title" style="color:#a78bfa; margin-bottom:10px;">RandomForest Model</h3>
+          <p class="sub" style="line-height:1.9;">
+            <strong style="color:#e5e7eb;">Features:</strong> hour_of_day · day_of_month · bank_code · prev_failure_count<br/>
+            <strong style="color:#e5e7eb;">Target:</strong> P(recovery_success)<br/>
+            <strong style="color:#e5e7eb;">Training:</strong> Synthetic bank clearing data (RBI RTGS settlement patterns)
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="card-title" style="margin-bottom:8px;">Why timing matters</h3>
+          <p class="sub" style="line-height:1.9;">
+            🌅 <strong style="color:#e5e7eb;">1st & 5th of month, 06:00–09:00 IST</strong><br/>
+            → Corporate salary credits hit accounts. HDFC/ICICI clearing batch runs.<br/>
+            📈 <strong style="color:var(--green);">+25% success probability</strong> vs off-peak retry
+          </p>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:0.6em;color:#6b7280;font-weight:600;letter-spacing:0.05em;margin:0 0 10px;">SAMPLE OUTPUT — SOFT DECLINE (HDFC)</p>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.35);border-radius:10px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <p style="font-size:0.6em;color:#86efac;font-weight:700;margin:0;">Retry #1 — Aug 25, 07:00 IST</p>
+              <p style="font-size:0.55em;color:#6b7280;margin:4px 0 0;">🌅 Month-End Clearing Peak</p>
+            </div>
+            <span style="font-size:1.1em;font-weight:800;color:#22c55e;">69.6%</span>
+          </div>
+          <div style="background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.35);border-radius:10px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <p style="font-size:0.6em;color:#c4b5fd;font-weight:700;margin:0;">Retry #2 — Aug 28, 07:00 IST</p>
+              <p style="font-size:0.55em;color:#6b7280;margin:4px 0 0;">🌄 Morning Clearing Window</p>
+            </div>
+            <span style="font-size:1.1em;font-weight:800;color:#a78bfa;">67.6%</span>
+          </div>
+          <div style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);border-radius:10px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <p style="font-size:0.6em;color:#93c5fd;font-weight:700;margin:0;">Retry #3 — Aug 29, 09:00 IST</p>
+              <p style="font-size:0.55em;color:#6b7280;margin:4px 0 0;">☀️ Midday Settlement Window</p>
+            </div>
+            <span style="font-size:1.1em;font-weight:800;color:#60a5fa;">61.2%</span>
+          </div>
+        </div>
+        <p style="font-size:0.52em;color:#4b5563;margin-top:10px;text-align:center;">vs. traditional: retry in 72h regardless of bank clearing cycle</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+  SLIDE 7 — COMPLIANCE & GUARDRAILS
+══════════════════════════════════════════════════════════════ -->
+<section data-background-color="#050810">
+  <div class="slide-inner">
+    <span class="tag tag-green">Compliance & Safety</span>
+    <h2 class="section">Trust is <span class="grad-text-green">hard-coded</span>,<br/>not an afterthought</h2>
+    <div class="divider" style="background:linear-gradient(90deg,#22c55e,#06b6d4);"></div>
+
+    <div class="grid-2" style="gap:16px;">
+      <div class="card-green">
+        <h3 class="card-title">🌙 Quiet Hours Enforcement</h3>
+        <p class="sub">No voice/SMS/WhatsApp between <strong style="color:#e5e7eb;">21:00–09:00 customer local time</strong>. Scheduler recalculates against IANA timezone DB before every dispatch.</p>
+      </div>
+      <div class="card-green">
+        <h3 class="card-title">⚡ Circuit Breaker (&lt;500ms)</h3>
+        <p class="sub">Real-time dispute/chargeback webhook terminates ALL active state machines for that customer within 500ms. Zero manual intervention required.</p>
+      </div>
+      <div class="card-green">
+        <h3 class="card-title">📏 Touchpoint Limits</h3>
+        <p class="sub">Maximum <strong style="color:#e5e7eb;">3 touchpoints per 7 days</strong> per customer, across all channels. Hard-coded — cannot be overridden by config.</p>
+      </div>
+      <div class="card-green">
+        <h3 class="card-title">💬 Tone Monitor</h3>
+        <p class="sub">All AI-generated messages validated against FDCPA / RBI Digital Recovery Guidelines. No aggressive language. All voice calls include mandatory disclosure statement.</p>
+      </div>
+      <div class="card-green">
+        <h3 class="card-title">🎁 Discount Authority Ceiling</h3>
+        <p class="sub">Max <strong style="color:#e5e7eb;">5% recovery incentive</strong> only if customer LTV &gt; ₹2.5L AND churn risk &gt; 85%. Validated against user role authorization before sending.</p>
+      </div>
+      <div class="card-green">
+        <h3 class="card-title">🛑 DNC Respect</h3>
+        <p class="sub">Instant opt-out on "DO NOT CALL" response. Stops all channels immediately. Persisted permanently — never re-activated without explicit consent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+  SLIDE 8 — ATTRIBUTION MODEL
+══════════════════════════════════════════════════════════════ -->
+<section data-background-color="#050810" class="bg-solution">
+  <div class="slide-inner">
+    <span class="tag tag-violet">Module 4 — Attribution Engine</span>
+    <h2 class="section">We <span class="grad-text">prove</span> the lift.<br/>No credit-stealing.</h2>
+    <div class="divider"></div>
+
+    <div class="grid-2" style="gap:28px; align-items:start;">
+      <div>
+        <div class="formula-box" style="margin-bottom:16px;">
+          Net_Agent_Recovery =<br/>
+          Total_Cohort_Recovered<br/>
+          − (Control_Rate × Treatment_Total)<br/><br/>
+          <span style="color:#86efac; font-size:0.85em;">= Proven incremental dollars, not vanity metric</span>
+        </div>
+        <div class="card" style="margin-bottom:12px;">
+          <h3 class="card-title">5% Holdout Group</h3>
+          <p class="sub">Every 20th event (determined by MD5 hash of recovery_id) is routed to control — <strong style="color:#e5e7eb;">no intervention</strong>. Their organic recovery rate becomes the baseline.</p>
+        </div>
+        <div class="card">
+          <h3 class="card-title">72-Hour Attribution Window</h3>
+          <p class="sub">Recovery within 72h of last intervention = <span style="color:#22c55e;">AGENT_DRIVEN</span>.<br/>Recovery after window = <span style="color:#9ca3af;">ORGANIC_BASELINE</span>.</p>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:0.6em;color:#6b7280;font-weight:600;letter-spacing:0.05em;margin:0 0 12px;">LIVE LEDGER STATUSES</p>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.35);border-radius:10px;padding:16px 20px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <span style="width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block;"></span>
+              <span style="font-size:0.65em;font-weight:700;color:#22c55e;">AGENT_DRIVEN</span>
+            </div>
+            <p class="sub">Customer recovered within 72h of AI intervention. Verified lift above baseline.</p>
+          </div>
+          <div style="background:rgba(107,114,128,0.12);border:1px solid rgba(107,114,128,0.35);border-radius:10px;padding:16px 20px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <span style="width:8px;height:8px;border-radius:50%;background:#6b7280;display:inline-block;"></span>
+              <span style="font-size:0.65em;font-weight:700;color:#9ca3af;">ORGANIC_BASELINE</span>
+            </div>
+            <p class="sub">Customer paid independently. Correctly excluded from agent recovery credit.</p>
+          </div>
+          <div style="background:rgba(71,85,105,0.12);border:1px solid rgba(71,85,105,0.35);border-radius:10px;padding:16px 20px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <span style="width:8px;height:8px;border-radius:50%;background:#475569;display:inline-block;"></span>
+              <span style="font-size:0.65em;font-weight:700;color:#94a3b8;">HOLDOUT</span>
+            </div>
+            <p class="sub">Control group — no intervention. Measures true organic baseline for lift calculation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+  SLIDE 9 — RAZORPAY INTEGRATION
+══════════════════════════════════════════════════════════════ -->
+<section data-background-color="#050810">
+  <div class="slide-inner">
+    <span class="tag tag-blue">Razorpay Integration</span>
+    <h2 class="section">Deep, not surface-level<br/><span class="grad-text">Razorpay integration</span></h2>
+    <div class="divider"></div>
+
+    <div class="grid-2" style="gap:20px;">
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="card" style="display:flex;gap:14px;align-items:flex-start;">
+          <span style="font-size:1.3em;flex-shrink:0;">🔔</span>
+          <div>
+            <h3 class="card-title">Webhook Ingestion + HMAC Verification</h3>
+            <p class="sub"><code style="color:#93c5fd;">payment.failed · subscription.halted · mandate.revoked · payment_link.paid · payment.dispute.created</code></p>
+            <p class="sub" style="margin-top:4px;">SHA-256 signature verified. Replay-tolerant. Sub-second ingestion.</p>
+          </div>
+        </div>
+        <div class="card" style="display:flex;gap:14px;align-items:flex-start;">
+          <span style="font-size:1.3em;flex-shrink:0;">🔗</span>
+          <div>
+            <h3 class="card-title">Payment Links API</h3>
+            <p class="sub">Auto-generated magic payment links dispatched via WhatsApp/SMS. Zero re-authentication — customer clicks once, pays instantly.</p>
+          </div>
+        </div>
+        <div class="card" style="display:flex;gap:14px;align-items:flex-start;">
+          <span style="font-size:1.3em;flex-shrink:0;">🔄</span>
+          <div>
+            <h3 class="card-title">Subscriptions API</h3>
+            <p class="sub">Monitors <code style="color:#93c5fd;">subscription.halted</code> events. Intelligent retry before subscription is permanently cancelled.</p>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="card" style="display:flex;gap:14px;align-items:flex-start;">
+          <span style="font-size:1.3em;flex-shrink:0;">📱</span>
+          <div>
+            <h3 class="card-title">UPI Autopay / e-Mandate Lifecycle</h3>
+            <p class="sub">Handles full mandate lifecycle: <code style="color:#93c5fd;">mandate.revoked · nach.debit_failed · recurring.charge_failed</code>. Hinglish IVR fallback with instant UPI link.</p>
+          </div>
+        </div>
+        <div class="card" style="display:flex;gap:14px;align-items:flex-start;">
+          <span style="font-size:1.3em;flex-shrink:0;">⚡</span>
+          <div>
+            <h3 class="card-title">Dispute Circuit Breaker</h3>
+            <p class="sub"><code style="color:#fca5a5;">payment.dispute.created</code> webhook terminates ALL active recovery state machines within &lt;500ms. Zero risk of contacting a disputing customer.</p>
+          </div>
+        </div>
+        <div class="card-violet" style="display:flex;gap:14px;align-items:flex-start;">
+          <span style="font-size:1.3em;flex-shrink:0;">🚀</span>
+          <div>
+            <h3 class="card-title" style="color:#a78bfa;">Production Path</h3>
+            <p class="sub">Plug in <code style="color:#c4b5fd;">rzp_live_</code> key + webhook secret → goes live. No schema changes. No code modifications needed by the merchant.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+  SLIDE 10 — RESULTS
+══════════════════════════════════════════════════════════════ -->
+<section data-background-color="#050810" class="bg-result">
+  <div class="slide-inner">
+    <span class="tag tag-green">Results</span>
+    <h2 class="section">Buildathon demo.<br/><span class="grad-text-green">Production-grade numbers.</span></h2>
+    <div class="divider" style="background:linear-gradient(90deg,#22c55e,#06b6d4);"></div>
+
+    <div class="grid-4" style="margin-bottom:24px;">
+      <div class="card" style="text-align:center; border-color:rgba(34,197,94,0.4);">
+        <div class="stat-big" style="color:#22c55e;">43.3%</div>
+        <div class="stat-label">Gross recovery rate<br/>(30-event demo)</div>
+      </div>
+      <div class="card" style="text-align:center; border-color:rgba(124,58,237,0.4);">
+        <div class="stat-big" style="color:#a78bfa;">69.6%</div>
+        <div class="stat-label">ML retry confidence<br/>at salary-day peak</div>
+      </div>
+      <div class="card" style="text-align:center; border-color:rgba(234,179,8,0.4);">
+        <div class="stat-big" style="color:#eab308;">₹75K</div>
+        <div class="stat-label">Net agent recovery<br/>above organic baseline</div>
+      </div>
+      <div class="card" style="text-align:center; border-color:rgba(59,130,246,0.4);">
+        <div class="stat-big" style="color:#60a5fa;">&lt;500ms</div>
+        <div class="stat-label">Circuit breaker<br/>response time</div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="gap:16px;">
+      <div class="card-green">
+        <h3 class="card-title" style="margin-bottom:10px;">PRD Targets vs Demo</h3>
+        <p class="sub" style="line-height:2;">
+          <span class="check">✓</span> Soft decline recovery ≥ 42% → <strong style="color:#22c55e;">43.3% achieved</strong><br/>
+          <span class="check">✓</span> Sub-minute triage latency → <strong style="color:#22c55e;">&lt;1s end-to-end</strong><br/>
+          <span class="check">✓</span> Quiet hours compliance → <strong style="color:#22c55e;">100% enforced</strong><br/>
+          <span class="check">✓</span> Circuit breaker &lt;500ms → <strong style="color:#22c55e;">Instant on webhook</strong><br/>
+          <span class="check">✓</span> 5% holdout group → <strong style="color:#22c55e;">Deterministic MD5 routing</strong>
+        </p>
+      </div>
+      <div class="card">
+        <h3 class="card-title" style="margin-bottom:10px;">Target at Scale</h3>
+        <p class="sub" style="line-height:2;">
+          📈 <strong style="color:#e5e7eb;">+28% to +45%</strong> recovery lift over baseline<br/>
+          📉 <strong style="color:#e5e7eb;">48 → ≤29 days</strong> DSO reduction (B2B)<br/>
+          💬 <strong style="color:#e5e7eb;">&lt;0.2%</strong> negative sentiment rate<br/>
+          🔒 <strong style="color:#e5e7eb;">100%</strong> escalation rule adherence<br/>
+          💰 <strong style="color:#e5e7eb;">₹840 Cr</strong> addressable for Razorpay merchants
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+  SLIDE 11 — ROADMAP
+══════════════════════════════════════════════════════════════ -->
+<section data-background-color="#050810">
+  <div class="slide-inner">
+    <span class="tag tag-violet">Roadmap</span>
+    <h2 class="section">Built in phases.<br/><span class="grad-text">Phase 1 is live today.</span></h2>
+    <div class="divider"></div>
+
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div class="phase-row" style="border-color:rgba(124,58,237,0.5);background:rgba(124,58,237,0.1);">
+        <div class="phase-num" style="background:linear-gradient(135deg,#22c55e,#16a34a);">✓</div>
+        <div style="flex:1;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+            <p style="font-size:0.65em;font-weight:700;color:#22c55e;margin:0;">Phase 1 — LIVE TODAY</p>
+            <span class="pill pill-green" style="font-size:0.5em;">Weeks 1–4</span>
+          </div>
+          <p class="sub">Razorpay webhook ingestion · Diagnostic classifier (6 categories) · ML retry sequencer · Holdout attribution engine · Next.js dashboard</p>
+        </div>
+      </div>
+      <div class="phase-row">
+        <div class="phase-num">2</div>
+        <div style="flex:1;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+            <p style="font-size:0.65em;font-weight:700;color:#e5e7eb;margin:0;">Phase 2 — Conversational Dunning</p>
+            <span class="pill pill-yellow" style="font-size:0.5em;">Weeks 5–8</span>
+          </div>
+          <p class="sub">1-click magic link infrastructure · WhatsApp/SMS dynamic recovery flows · B2B PTP semantic email parsing · Promise-to-Pay tracker</p>
+        </div>
+      </div>
+      <div class="phase-row">
+        <div class="phase-num">3</div>
+        <div style="flex:1;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+            <p style="font-size:0.65em;font-weight:700;color:#e5e7eb;margin:0;">Phase 3 — Voice Agent & Hinglish IVR</p>
+            <span class="pill pill-violet" style="font-size:0.5em;">Weeks 9–12</span>
+          </div>
+          <p class="sub">Sub-800ms voice pipeline · Whisper-Large-v3 ASR (Indian accent tuned) · GPT-4o reasoning · ElevenLabs TTS · Real-time UPI link dispatch during call</p>
+        </div>
+      </div>
+      <div class="phase-row">
+        <div class="phase-num">4</div>
+        <div style="flex:1;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+            <p style="font-size:0.65em;font-weight:700;color:#e5e7eb;margin:0;">Phase 4 — ERP Deep Integration</p>
+            <span class="pill pill-violet" style="font-size:0.5em;">Weeks 13–16</span>
+          </div>
+          <p class="sub">NetSuite + QuickBooks bi-directional sync · Enterprise dispute resolution workflows · Custom compliance auditing suite · Multi-PSP (Stripe, Chargebee, Zuora)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+  SLIDE 12 — TEAM / CTA
+══════════════════════════════════════════════════════════════ -->
+<section data-background-color="#050810" class="bg-team">
+  <div class="slide-inner" style="align-items:center; text-align:center;">
+    <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:24px;">
+      <div style="width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,#7c3aed,#4f46e5);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.5em;color:white;">R</div>
+    </div>
+
+    <h1 class="main" style="font-size:2.4em !important;">Recover more revenue.<br/><span class="grad-text">Prove every rupee.</span></h1>
+
+    <p class="hero-sub" style="margin:16px auto 32px; text-align:center;">
+      RevEngine AI turns passive payment failures into active recoveries —<br/>
+      with ML precision, compliance by design, and provable attribution.
+    </p>
+
+    <div style="display:flex;justify-content:center;gap:16px;margin-bottom:40px;flex-wrap:wrap;">
+      <span class="pill pill-green">✓ 43.3% recovery rate (demo)</span>
+      <span class="pill pill-violet">✓ Zero TS errors · Clean build</span>
+      <span class="pill pill-yellow">✓ 5% holdout group · Proven lift</span>
+      <span class="pill" style="background:rgba(59,130,246,0.2);color:#93c5fd;border:1px solid rgba(59,130,246,0.4);">✓ Razorpay-native · Plug &amp; play</span>
+    </div>
+
+    <div style="border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:28px 40px;display:inline-block;max-width:500px;background:rgba(255,255,255,0.03);">
+      <p style="font-size:0.55em;color:#6b7280;font-weight:600;letter-spacing:0.08em;margin:0 0 12px;">BUILT BY</p>
+      <p style="font-size:1.2em;font-weight:800;color:white;margin:0;">Pratham Prasad</p>
+      <p style="font-size:0.6em;color:#9ca3af;margin:6px 0 16px;">RevOps / AI Core · Razorpay Buildathon 2025</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="http://localhost:3000" style="color:#a78bfa;font-size:0.58em;text-decoration:none;background:rgba(124,58,237,0.2);padding:6px 14px;border-radius:8px;border:1px solid rgba(124,58,237,0.4);">🖥️ localhost:3000 (Dashboard)</a>
+        <a href="http://localhost:8000/docs" style="color:#93c5fd;font-size:0.58em;text-decoration:none;background:rgba(59,130,246,0.2);padding:6px 14px;border-radius:8px;border:1px solid rgba(59,130,246,0.4);">📖 localhost:8000/docs (API)</a>
+      </div>
+    </div>
+
+    <div class="rzp-badge" style="margin-top:28px;">🔵 Razorpay Buildathon 2025 · RevEngine AI · Phase 1 Submission</div>
+  </div>
+</section>
+
+</div><!-- /slides -->
+</div><!-- /reveal -->
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    transition: 'fade',
+    transitionSpeed: 'fast',
+    backgroundTransition: 'fade',
+    progress: true,
+    controls: true,
+    center: false,
+    width: 1280,
+    height: 720,
+    margin: 0.04,
+    plugins: [],
+  });
+</script>
+</body>
+</html>
