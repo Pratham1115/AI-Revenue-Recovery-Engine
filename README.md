@@ -3,7 +3,6 @@
 <div align="center">
 
 ![RevEngine AI](https://img.shields.io/badge/RevEngine-AI-7c3aed?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEyIi8+PC9zdmc+)
-![Razorpay Buildathon](https://img.shields.io/badge/Razorpay-Buildathon%202025-0066FF?style=for-the-badge)
 ![Phase 1](https://img.shields.io/badge/Phase%201-Live-22c55e?style=for-the-badge)
 ![Recovery Rate](https://img.shields.io/badge/Recovery%20Rate-43.3%25-a78bfa?style=for-the-badge)
 
@@ -28,7 +27,6 @@
 - [Compliance & Guardrails](#compliance--guardrails)
 - [Attribution Model](#attribution-model)
 - [Demo Results](#demo-results)
-- [Roadmap](#roadmap)
 - [Team](#team)
 
 ---
@@ -405,25 +403,12 @@ Smoke test with 30 synthetic events:
 
 ---
 
-## Roadmap
-
-| Phase | Timeline | Deliverables |
-|---|---|---|
-| **Phase 1** ✅ **(Live)** | Weeks 1–4 | Razorpay webhooks · Classifier · ML retry · Holdout attribution · Dashboard |
-| **Phase 2** | Weeks 5–8 | Magic link infrastructure · WhatsApp/SMS flows · B2B PTP email parsing |
-| **Phase 3** | Weeks 9–12 | Sub-800ms voice pipeline · Whisper-Large-v3 ASR · Hinglish IVR · ElevenLabs TTS |
-| **Phase 4** | Weeks 13–16 | NetSuite/QuickBooks sync · Multi-PSP (Stripe, Chargebee, Zuora) · Compliance audit suite |
-
----
-
 ## Team
 
 **Pratham Prasad** — Product Lead, RevOps / AI Core
-
-Built for the **Razorpay Buildathon 2025**
 
 ---
 
 ## License
 
-MIT — built for the Razorpay Buildathon 2025
+MIT
